@@ -1,0 +1,28 @@
+{
+  "name": "ecom",
+  "version": "1.0.0",
+  "description": "MERN shopping cart app",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node back-end/server",
+    "server": "nodemon back-end/server",
+    "client": "npm start --prefix front-end",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darrylmangibin/mern-ecommerce.git"
+  },
+  "author": "Darryl Mangibin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darrylmangibin/mern-ecommerce/issues"
+  },
+  "homepage": "https://github.com/darrylmangibin/mern-ecommerce#readme",
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
+}
