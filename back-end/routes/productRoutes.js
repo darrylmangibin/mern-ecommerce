@@ -5,9 +5,9 @@ import Product from "../models/Product.js";
 
 const router = express.Router();
 
-// @desc    Fetch all products   
-// @route   Get api/products   
-// @access  Public  
+// @desc    Fetch all products
+// @route   Get api/products
+// @access  Public
 router.get(
 	"/",
 	asyncHandler(async (req, res) => {
@@ -17,18 +17,19 @@ router.get(
 	})
 );
 
-// @desc    Fetch single products   
-// @route   Get api/products /:id  
-// @access  Public  
+// @desc    Fetch single products
+// @route   Get api/products /:id
+// @access  Public
 router.get(
 	"/:id",
 	asyncHandler(async (req, res) => {
-		const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id);
 
 		if (product) {
 			res.json(product);
 		} else {
-			res.status(400).json({ message: "Product not found" });
+			res.status(404);
+			throw new Error("Product not found");
 		}
 	})
 );
