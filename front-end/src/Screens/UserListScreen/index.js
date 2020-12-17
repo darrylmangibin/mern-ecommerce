@@ -6,7 +6,7 @@ import { Table, Button } from "react-bootstrap";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 
-import { listUsers } from "../../actions/userActions";
+import { listUsers, deleteUser } from "../../actions/userActions";
 
 const UserListScreen = ({ history }) => {
 	const dispatch = useDispatch();
@@ -17,7 +17,8 @@ const UserListScreen = ({ history }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
-	console.log(userList);
+	const userDelete = useSelector((state) => state.userDelete);
+	const { success: successDelete } = userDelete;
 
 	useEffect(() => {
 		if (userInfo && userInfo.isAdmin) {
@@ -25,9 +26,11 @@ const UserListScreen = ({ history }) => {
 		} else {
 			history.push("/login");
 		}
-	}, [dispatch, history]);
+	}, [dispatch, history, userInfo, successDelete]);
 
-	const deleteHandler = (id) => {};
+	const deleteHandler = (id) => {
+		if (window.confirm("Are you Sure?")) dispatch(deleteUser(id));
+	};
 
 	return (
 		<Fragment>
@@ -50,7 +53,6 @@ const UserListScreen = ({ history }) => {
 					<tbody>
 						{users.map((user) => (
 							<tr key={user._id}>
-								{console.log(user)}
 								<td>{user._id}</td>
 								<td>{user.name}</td>
 								<td>
@@ -60,7 +62,7 @@ const UserListScreen = ({ history }) => {
 									{user.isAdmin ? (
 										<i className="fas fa-check" style={{ color: "green" }}></i>
 									) : (
-										<i className="fas -fa-times" style={{ color: "red" }}></i>
+										<i className="fas fa-times" style={{ color: "red" }}></i>
 									)}
 								</td>
 								<td>
@@ -69,13 +71,15 @@ const UserListScreen = ({ history }) => {
 											<i className="fas fa-edit"></i>
 										</Button>
 									</LinkContainer>
-									<Button
-										variant="danger"
-										className="btn-sm"
-										onClick={() => deleteHandler(user._id)}
-									>
-										<i className="fas fa-trash"></i>
-									</Button>
+									{!user.isAdmin && (
+										<Button
+											variant="danger"
+											className="btn-sm"
+											onClick={() => deleteHandler(user._id)}
+										>
+											<i className="fas fa-trash"></i>
+										</Button>
+									)}
 								</td>
 							</tr>
 						))}
