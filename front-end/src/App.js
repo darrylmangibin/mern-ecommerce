@@ -18,7 +18,7 @@ import UserListScreen from "./Screens/UserListScreen";
 const App = () => {
 	return (
 		<Router>
-			<Header />
+			<Route render={(props) => <Header {...props} />} />
 			<main className="py-3">
 				<Container>
 					<Route path="/order/:id" component={OrderScreen} />

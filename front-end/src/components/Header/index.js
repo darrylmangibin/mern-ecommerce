@@ -4,7 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 import { logout } from "../../actions/userActions";
 
-const Header = () => {
+const Header = ({ history }) => {
 	const dispatch = useDispatch();
 
 	const userLogin = useSelector((state) => state.userLogin);
@@ -12,6 +12,7 @@ const Header = () => {
 
 	const logoutHandler = () => {
 		dispatch(logout());
+		history.push("/login");
 	};
 
 	return (
