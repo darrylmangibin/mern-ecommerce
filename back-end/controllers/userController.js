@@ -157,8 +157,6 @@ const updateUser = asyncHandler(async (req, res) => {
 
 		const updatedUser = await user.save();
 
-		console.log(updatedUser);
-
 		res.json({
 			_id: updatedUser._id,
 			email: updatedUser.email,
