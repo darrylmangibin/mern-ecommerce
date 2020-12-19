@@ -13,6 +13,7 @@ front-end/.eslintcache
 
 # production
 /build
+/font-end/build
 
 # misc
 .DS_Store
