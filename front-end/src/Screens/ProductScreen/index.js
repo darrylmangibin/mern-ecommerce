@@ -14,6 +14,7 @@ import {
 import Rating from "../../components/Rating";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
+import Meta from "../../components/Meta";
 
 import {
 	listProductDetails,
@@ -70,6 +71,7 @@ const ProductScreen = ({ match, history }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<Fragment>
+          <Meta title={product.name} />
 					<Row>
 						<Col md={6}>
 							<Image src={product.image} alt={product.name} fluid />

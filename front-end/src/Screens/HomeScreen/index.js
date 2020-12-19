@@ -1,12 +1,14 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import Product from "../../components/Product";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import Paginate from "../../components/Paginate";
 import ProductCarousel from "../../components/ProductCarousel";
+import Meta from "../../components/Meta";
 
 import { listProducts } from "../../actions/productActions";
 
@@ -25,7 +27,18 @@ const HomeScreen = ({ match }) => {
 
 	return (
 		<Fragment>
-			{!keyword && <ProductCarousel />}
+			<Meta
+				title="Welcome to Bao Shop | Home"
+				keyword="pets accessories, pet foods, pet vitamins and medicines"
+				description="We sell the best products for cheap prices"
+			/>
+			{!keyword ? (
+				<ProductCarousel />
+			) : (
+				<Link to="/" className="btn btn-light">
+					Go Back
+				</Link>
+			)}
 			<h1>Latest Products</h1>
 			{loading ? (
 				<Loader />
